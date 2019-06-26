@@ -82,9 +82,9 @@ if __name__ == '__main__':
     print(params)
     pool.map(my_run, params)
     logging.info('1.log')
-    '''pool.map(my_run2, params)
+    pool.map(my_run2, params)
     logging.info('2.log')
-    pool.map(my_run3, params)
+    '''pool.map(my_run3, params)
     logging.info('3.log')
     pool.map(my_run4, params)
     logging.info('4.log')'''
