@@ -1,4 +1,5 @@
 from Double_MA import TestStrategy
+from Double_MA_sell import TestStrategy_sell
 import time
 import backtrader as bt
 import backtrader.analyzers as btanalyzers
@@ -38,7 +39,7 @@ def my_run2(arg):
     dataframe['openinterest'] = 0
     data = bt.feeds.PandasData(dataname=dataframe)
     cerebro = bt.Cerebro()
-    cerebro.addstrategy(TestStrategy, *arg)
+    cerebro.addstrategy(TestStrategy_sell, *arg)
     cerebro.adddata(data)
     cerebro.broker.setcash(1000000.0)
     cerebro.broker.setcommission(commission=0.0006)
@@ -51,7 +52,7 @@ def my_run2(arg):
     sharp = cerebro.run()[0].analyzers.mysharpe.get_analysis()['sharperatio']
     drawdown = cerebro.run()[0].analyzers.mydrawdown.get_analysis().max.drawdown
 
-    out_message = '%s,%s,%s,%s,%s,%.2f,%s,%s,%s' % (arg[0], arg[1], arg[2], arg[4], arg[6],final_value,sharp,drawdown,1)
+    out_message = '%s,%s,%s,%s,%s,%.2f,%s,%s,%s' % (arg[0],arg[1], arg[3], arg[5], arg[7],final_value,sharp,drawdown,2)
     print(out_message)
     logging.info(out_message)
 
