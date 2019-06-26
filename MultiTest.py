@@ -45,12 +45,12 @@ def my_run2(arg):
     cerebro.broker.setcommission(commission=0.0006)
     cerebro.addanalyzer(btanalyzers.SharpeRatio, _name='mysharpe',timeframe=bt.TimeFrame.Days)
     cerebro.addanalyzer(btanalyzers.DrawDown, _name='mydrawdown')
-    cerebro.run()
-    logging.basicConfig(filename='MovingAverage_buy_2018_results.log', level=logging.DEBUG)
+    threats=cerebro.run()
+    logging.basicConfig(filename='sell_2018_results.log', level=logging.DEBUG)
 
     final_value = cerebro.broker.getvalue()
-    sharp = cerebro.run()[0].analyzers.mysharpe.get_analysis()['sharperatio']
-    drawdown = cerebro.run()[0].analyzers.mydrawdown.get_analysis().max.drawdown
+    sharp = threats[0].analyzers.mysharpe.get_analysis()['sharperatio']
+    drawdown = threats[0].analyzers.mydrawdown.get_analysis().max.drawdown
 
     out_message = '%s,%s,%s,%s,%s,%.2f,%s,%s,%s' % (arg[0],arg[1], arg[3], arg[5], arg[7],final_value,sharp,drawdown,2)
     print(out_message)
